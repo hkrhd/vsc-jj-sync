@@ -1,5 +1,3 @@
-// See https://go.microsoft.com/fwlink/?LinkId=733558
-// for the documentation about the tasks.json format
 {
 	"version": "2.0.0",
 	"problemMatchers": [
@@ -31,46 +29,58 @@
 	],
 	"tasks": [
 		{
-            "label": "watch",
-            "dependsOn": [
-                "npm: watch:tsc",
-                "npm: watch:esbuild"
-            ],
-            "presentation": {
-                "reveal": "never"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "type": "npm",
-            "script": "watch:esbuild",
-            "group": "build",
-            "problemMatcher": "$esbuild-watch",
-            "isBackground": true,
-            "label": "npm: watch:esbuild",
-            "presentation": {
-                "group": "watch",
-                "reveal": "never"
-            }
-        },
+			"label": "pnpm: install",
+			"type": "shell",
+			"command": "pnpm install --frozen-lockfile",
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "silent"
+			}
+		},
 		{
-            "type": "npm",
-            "script": "watch:tsc",
-            "group": "build",
-            "problemMatcher": "$tsc-watch",
-            "isBackground": true,
-            "label": "npm: watch:tsc",
-            "presentation": {
-                "group": "watch",
-                "reveal": "never"
-            }
-        },
+			"label": "watch",
+			"dependsOn": [
+				"pnpm: install",
+				"pnpm: watch:tsc",
+				"watch:esbuild"
+			],
+			"dependsOrder": "sequence",
+			"presentation": {
+				"reveal": "never"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
 		{
-			"type": "npm",
-			"script": "watch-tests",
+			"label": "watch:esbuild",
+			"type": "shell",
+			"command": "pnpm run watch:esbuild",
+			"group": "build",
+			"problemMatcher": "$esbuild-watch",
+			"isBackground": true,
+			"presentation": {
+				"group": "watch",
+				"reveal": "never"
+			}
+		},
+		{
+			"label": "pnpm: watch:tsc",
+			"type": "shell",
+			"command": "pnpm run watch:tsc",
+			"group": "build",
+			"problemMatcher": "$tsc-watch",
+			"isBackground": true,
+			"presentation": {
+				"group": "watch",
+				"reveal": "never"
+			}
+		},
+		{
+			"label": "pnpm: watch-tests",
+			"type": "shell",
+			"command": "pnpm run watch-tests",
 			"problemMatcher": "$tsc-watch",
 			"isBackground": true,
 			"presentation": {
@@ -82,19 +92,20 @@
 		{
 			"label": "tasks: watch-tests",
 			"dependsOn": [
-				"npm: watch",
-				"npm: watch-tests"
+				"watch",
+				"pnpm: watch-tests"
 			],
 			"problemMatcher": []
 		},
 		{
 			"label": "build: vsix",
-			"type": "npm",
-			"script": "vsix",
+			"type": "shell",
+			"command": "pnpm run vsix",
 			"group": "build",
-			"presentation": { "reveal": "always" },
+			"presentation": {
+				"reveal": "always"
+			},
 			"problemMatcher": []
 		}
-
 	]
 }

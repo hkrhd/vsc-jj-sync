@@ -1,1 +1,2 @@
 - github actionsによるセマンティックリリース
+- README.md を更新したら README_JA.md も同期更新．

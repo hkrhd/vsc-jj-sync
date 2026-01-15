@@ -1,6 +1,8 @@
 # jj-sync
 
-Auto-commit and push Jujutsu (jj) changes when a workspace folder has been idle for 3 minutes.
+[日本語 README_JA.md](./README_JA.md)
+
+Auto-commit and push Jujutsu (jj) changes like obsidian-git.
 
 ## Features
 
@@ -14,6 +16,7 @@ Auto-commit and push Jujutsu (jj) changes when a workspace folder has been idle 
 
 - `jj` must be available on PATH.
 - A Git remote must exist for `jj git push -b main`.
+- VS Code 1.63+ is required (uses `vscode.workspace.onDidRenameFiles`).
 
 ## Extension Settings
 
